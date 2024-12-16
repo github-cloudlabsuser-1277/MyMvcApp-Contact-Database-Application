@@ -1,15 +1,20 @@
 @model IEnumerable<MyMvcApp.Models.User>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "User List";
 }
 
-<h2>Index</h2>
+<h2>User List</h2>
+
+<form method="get" action="@Url.Action("Index", "User")">
+    <input type="text" name="searchString" placeholder="Search by name" />
+    <button type="submit">Search</button>
+</form>
 
 <p>
     @Html.ActionLink("Create New", "Create", "User")
 </p>
-<table class="table">
+<table class="table"></table>
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)

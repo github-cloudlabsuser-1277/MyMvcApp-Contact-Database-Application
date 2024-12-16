@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MyMvcApp.Models;
 
@@ -101,6 +100,18 @@ namespace MyMvcApp.Controllers
 
             userlist.Remove(user);
             return RedirectToAction(nameof(Index));
+        }
+        // GET: User/Search
+        public ActionResult Search(string searchTerm)
+        {
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                return View("Index", userlist);
+            }
+
+            var results = userlist.Where(u => u.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) || 
+                                              u.Email.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+            return View("Index", results);
         }
     }
 }
